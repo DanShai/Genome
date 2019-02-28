@@ -1,6 +1,6 @@
 '''
 
-@author: ben
+@author: dan
 '''
 
 from __future__ import division
