@@ -9,6 +9,23 @@ Can be used for :
 - Regression.
 - Kernel finder for better understanding the data
 
+### The Genome parameters are:
+
+```python
+nrOpts = {"opx": 2, "depth": 2, "nvars": None,
+    "pvc": .7, "pf": 1., "cross": .4, "mut": .6,"mrand": .5
+    }
+```
+
+### The Network parameters are:
+
+```python
+gOpts = {"mxepoch": 3000, "bsize": 64, "bupdate": 5, "fraction": .5,"history": 4,
+ "mxtries": 10,"mode": this one take either "REG"  or "CLA" }
+```
+
+you can fine tune them to your need.
+
 check the GOerationsDef.py file for the list of functions can the Genome take! you can then select what slot / group of functionalities your Genome will use for solving the problem!
 
 - group 1 : basic operations add and multiply
