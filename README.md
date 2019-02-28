@@ -1,6 +1,6 @@
 # Who Needs Neuron when you have Genome
 
-Faster Genome Network ala Neural Network!
+Faster Genome Network ala Neural Network! and reviving the genetic programming through neural networks!
 The Network mimic Neural Network, contains Layers and Nodes. you can add activations and stuffs!
 the Advantage is to have a real expressive formula for your network instead of weights!
 Can be used for :
