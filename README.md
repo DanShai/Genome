@@ -8,6 +8,7 @@ Can be used for :
 - Classification.
 - Regression.
 - Kernel finder for better understanding the data
+- Feature extraction
 
 ### The Genome parameters are:
 
