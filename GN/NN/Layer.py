@@ -16,7 +16,6 @@ class Layer(object):
         self._nodes = np.empty(shape=(self._num_nodes,), dtype=np.object)
 
     def create(self):
-        #self._nodes  = np.array([Neuron(ops=self._nOpts) for x in xrange(self._num_nodes) ], dtype=np.object)
         for i in xrange(self._num_nodes):
             n_ero = Genome(ops=self._nOpts)
             n_ero.create()

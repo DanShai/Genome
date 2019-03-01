@@ -59,32 +59,32 @@ class Genome:
     def create(self):
         self._nGraph = self.createGraph()
 
-    def crossOver(self, otherNeuron):
-        self._nGraph = self.crossoverGraph(self._nGraph, otherNeuron._nGraph)
+    def crossOver(self, otherGenome):
+        self._nGraph = self.crossoverGraph(self._nGraph, otherGenome._nGraph)
 
     def mutate(self):
         self._nGraph = self.mutateGraph(self._nGraph)
 
-    def mutateGraph(self, t):
+    def mutateGraph(self, g):
         if np.random.random() < self._mutation:
             return self.createGraph()
         else:
-            nGraph = deepcopy(t)
-            if isinstance(t, GPGraphNode):
+            nGraph = deepcopy(g)
+            if isinstance(g, GPGraphNode):
                 nGraph._children = [self.mutateGraph(
-                    child) for child in t._children]
+                    child) for child in g._children]
 
             return nGraph
 
-    def crossoverGraph(self, t1, t2, top=True):
+    def crossoverGraph(self, g1, g2, top=True):
 
         if (np.random.random() < self._cross) and not top:
-            return deepcopy(t2)
+            return deepcopy(g2)
         else:
-            aGraph = deepcopy(t1)
-            if isinstance(t1, GPGraphNode) and isinstance(t2, GPGraphNode):
+            aGraph = deepcopy(g1)
+            if isinstance(g1, GPGraphNode) and isinstance(g2, GPGraphNode):
                 aGraph._children = [self.crossoverGraph(
-                    c, np.random.choice(t2._children), False) for c in t1._children]
+                    c, np.random.choice(g2._children), False) for c in g1._children]
             return aGraph
 
     def setOpIndex(self, idx):
