@@ -34,11 +34,6 @@ class NRegressor(NBase):
 
         return X, yhat
 
-    # def getIYhat(self):
-    #     X = self._idatas["X"]
-    #     nYhat =  np.array([ self.predict(self._best_net,x) for x in X ])
-    #     return X,nYhat
-
     def test_me(self):
         nX = self._idatas["nX"]
         nY = self._idatas["nY"]
