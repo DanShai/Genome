@@ -28,6 +28,7 @@ gOpts = {"mxepoch": 3000, "bsize": 64, "bupdate": 5, "fraction": .5,"history": 4
 you can fine tune them to your need.
 
 check the GOerationsDef.py file for the list of functions can the Genome take! you can then select what slot / group of functionalities your Genome will use for solving the problem!
+set the group index in the variable "opx" of the genome option : nrOpts = {"opx": 2,..}
 
 - group 1 : basic operations add and multiply
 - group 2-3 : more general functions
