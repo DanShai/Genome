@@ -145,5 +145,5 @@ class NetMain(object):
 
 if __name__ == "__main__":
     m = NetMain()
-    # m.reg()
-    m.classify()
+    m.reg()
+    # m.classify()
