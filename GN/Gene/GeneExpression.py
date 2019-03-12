@@ -9,8 +9,8 @@ from Stack import Stack
 
 class GeneExpression:
 
-    def convertToExpression(self, atree):
-        nodes = atree.nodes()
+    def convertToExpression(self, agraph):
+        nodes = agraph.nodes()
         mstack = Stack()
         for nd in nodes:
             if isinstance(nd, GOperation):
