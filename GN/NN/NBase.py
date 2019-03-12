@@ -28,9 +28,7 @@ class NBase(object):
         self._max_data_batch = self._idatas["X"].shape[0]-1
         self._batch_size = min(
             g_opts["bsize"], int(self._max_data_batch))  # 60
-        # max( 100 , int(self._max_data_batch/self._batch_size))  # 500 # REG 5000 should be X / lm to zap almost all intervals..
         self._max_epoch = g_opts["mxepoch"]
-        # 5 #  int( .25*self._maxEpoch / (self._max_data_batch/self._batch_size) ) +1
         self._batch_update = g_opts["bupdate"]
         self._max_tries = g_opts["mxtries"]  # 5
         self._history = g_opts["history"]  #
@@ -55,7 +53,7 @@ class NBase(object):
 
     def shift_idatas(self, st, en):
         if self._cur_epoch % self._batch_update == 0:
-            st += self._batch_size + np.random.randint(0, 10)
+            st += self._batch_size  # + np.random.randint(0, 10)
             en = st + self._batch_size
             if en > self._max_data_batch:
                 st = 0

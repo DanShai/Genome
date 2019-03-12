@@ -4,8 +4,11 @@
 '''
 
 from __future__ import division
-import numpy as np
+
 from copy import deepcopy
+
+import numpy as np
+
 from Layer import Layer
 from NBase import NBase
 
@@ -39,23 +42,6 @@ class NClassifier(NBase):
 
         return scr
 
-    def get_boundaries(self):
-        X = self._idatas["X"]
-        mx = np.min(X)
-        Mx = np.max(X)
-        P = []
-        XX = []
-        for x1 in np.linspace(mx, Mx, num=200):
-            for x2 in np.linspace(mx, Mx, num=200):
-                x = np.array([x1, x2])
-                XX.append(x)
-                p = self.predict(self._best_net, x)
-                P.append(p)
-        YY = np.argmax(np.array(P), axis=1)
-        XX = np.array(XX)
-
-        return XX, YY
-
     def getYhat(self, nx=False, multi=False):
         X = self._idatas["X"]
         if nx:
@@ -83,7 +69,6 @@ class NClassifier(NBase):
 
     def softmax(self, x):
         e_x = np.exp((x - np.max(x)))
-        #e_x = np.exp(x)
         out = e_x / e_x.sum()
         return out
 
@@ -91,4 +76,4 @@ class NClassifier(NBase):
         return .5 * (1 + np.tanh(.5 * x))
 
     def relu(self, x):
-        return np.maximum(x, .01*x, x)
+        return np.maximum(x, .0001*x, x)

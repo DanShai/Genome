@@ -9,7 +9,7 @@ from copy import deepcopy
 from GN.Gene.Genome import Genome
 
 
-class Layer(object):
+class Layer:
     def __init__(self, num_nodes, n_opts, **kwargs):
         self._num_nodes = num_nodes
         self._nOpts = n_opts
