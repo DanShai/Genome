@@ -11,8 +11,8 @@ from datetime import datetime
 from random import choice
 
 
-class NBase(object):
-    def __init__(self, dim=[], datas=None, nr_opts={}, g_opts={}, **kwargs):
+class NBase:
+    def __init__(self, dim=[], datas=None, nr_opts={}, g_opts={}):
         self._dim = dim  # [inp_nvars,l1,l2,lout]
         self._size = len(dim)-1
         self._idatas = datas

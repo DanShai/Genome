@@ -1,19 +1,20 @@
 
-import matplotlib.pyplot as plt
+import warnings
 
+import matplotlib.pyplot as plt
+import numpy as np
 from sklearn import datasets
-from sklearn.preprocessing import MinMaxScaler
 from sklearn.decomposition import PCA
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.utils import shuffle
+
+from GN.KTSNE.ktsne import Ktsne
 from GN.NN.NClassifier import NClassifier
 from GN.NN.NRegressor import NRegressor
+from GN.Plot.Plotter import Plotter
 from GN.Threads.PThread import PThread
 from GN.Threads.SetInterval import SetInterval
-from GN.Plot.Plotter import Plotter
-from GN.KTSNE.ktsne import Ktsne
-import numpy as np
 
-import warnings
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 
@@ -64,7 +65,7 @@ class NetMain(object):
 
         nrOpts = {"opx": 1, "depth": 1, "nvars": None, "pvc": .6,
                   "pf": 1., "cross": .4, "mut": .6, "mrand": .5}
-        gOpts = {"mxepoch": 4000, "bsize": 150, "bupdate": 25, "fraction": .5,
+        gOpts = {"mxepoch": 4000, "bsize": 150, "bupdate": 25, "fraction": .25,
                  "history": 4, "mxtries": 5, "mode": "CLA"}
 
         print nrOpts
@@ -106,7 +107,7 @@ class NetMain(object):
 
         nrOpts = {"opx": 2, "depth": 2, "nvars": None, "pvc": .7,
                   "pf": 1., "cross": .4, "mut": .6, "mrand": .5}
-        gOpts = {"mxepoch": 3000, "bsize": 64, "bupdate": 5, "fraction": .5,
+        gOpts = {"mxepoch": 3000, "bsize": 64, "bupdate": 5, "fraction": .25,
                  "history": 4, "mxtries": 10, "mode": "REG"}
 
         print nrOpts

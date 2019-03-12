@@ -10,7 +10,7 @@ from GN.Gene.Genome import Genome
 
 
 class Layer:
-    def __init__(self, num_nodes, n_opts, **kwargs):
+    def __init__(self, num_nodes, n_opts):
         self._num_nodes = num_nodes
         self._nOpts = n_opts
         self._nodes = np.empty(shape=(self._num_nodes,), dtype=np.object)
