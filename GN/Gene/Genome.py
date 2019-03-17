@@ -5,13 +5,16 @@
 
 
 from __future__ import division
+
 from copy import deepcopy
-from GPGraphNode import GPGraphNode
-from GPConstNode import GPConstNode
-from GPVarNode import GPVarNode
+
+import numpy as np
+
 from GeneExpression import GeneExpression
 from GOperationsDef import GOperationsDef
-import numpy as np
+from GPConstNode import GPConstNode
+from GPGraphNode import GPGraphNode
+from GPVarNode import GPVarNode
 
 
 class Genome:
@@ -55,6 +58,9 @@ class Genome:
 
     def evaluate(self, _input):
         return self._nGraph.evaluate(_input)
+
+    def get_index(self):
+        return self._nGraph.get_index()
 
     def create(self):
         self._nGraph = self.createGraph()

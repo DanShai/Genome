@@ -4,6 +4,7 @@
 '''
 
 from __future__ import division
+
 from GPNode import GPNode
 
 
@@ -23,3 +24,6 @@ class GPVarNode(GPNode):
 
     def nodes(self):
         return ['X' + str(self._paramIndex)]
+
+    def get_index(self):
+        return [self._paramIndex]

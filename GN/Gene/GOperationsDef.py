@@ -4,8 +4,9 @@
 '''
 
 from __future__ import division
-from GOperation import GOperation
+
 import GFunctions as gf
+from GOperation import GOperation
 
 
 class GOperationsDef:
@@ -37,10 +38,11 @@ class GOperationsDef:
 
         self._FunctSlots = {
             1: [self.mul_o, self.add_o],
-            2: [self.mul_o, self.sub_o, self.add_o, self.log_o, self.sqrt_o, self.exp_o, self.cos_o, self.sin_o],
-            3: [self.inv_o, self.abs_o, self.div_o, self.mul_o, self.sub_o, self.add_o, self.log_o, self.sqrt_o, self.exp_o, self.cos_o, self.sin_o],
-            4: [self.max_o, self.min_o, self.if_o, self.lt_o, self.gt_o, self.not_o, self.xor_o, self.and_o, self.or_o],
-            5: [self.inv_o, self.div_o, self.mod_o, self.xor_o, self.and_o, self.or_o, self.mul_o, self.sub_o, self.add_o,
+            2: [self.mul_o, self.sub_o, self.add_o, self.log_o, self.sqrt_o, self.exp_o],
+            3: [self.mul_o, self.sub_o, self.add_o, self.sqrt_o, self.cos_o, self.sin_o],
+            4: [self.inv_o, self.abs_o, self.div_o, self.mul_o, self.sub_o, self.add_o, self.log_o, self.sqrt_o, self.exp_o, self.cos_o, self.sin_o],
+            5: [self.max_o, self.min_o, self.if_o, self.lt_o, self.gt_o, self.not_o, self.xor_o, self.and_o, self.or_o],
+            6: [self.inv_o, self.div_o, self.mod_o, self.xor_o, self.and_o, self.or_o, self.mul_o, self.sub_o, self.add_o,
                 self.log_o, self.sqrt_o, self.exp_o, self.cos_o, self.sin_o, self.max_o, self.min_o, self.abs_o, self.if_o, self.gt_o, self.lt_o, self.not_o]
         }
 
@@ -57,14 +59,16 @@ class GOperationsDef:
         self._FunctSlots[index].append(f)
 
     def get_cops_dict(self):
-        flist = self.get_Functions(4)
+        l = len(self._FunctSlots.keys())
+        flist = self.get_Functions(l)
         ops = [(str(x.get_name()), x) for x in flist]
         dops = dict(ops)
         return dops
 
     def get_ops_dict(self):
 
-        flist = self.get_Functions(4)
+        l = len(self._FunctSlots.keys())
+        flist = self.get_Functions(l)
         ops = [(str(x.get_name()), x.get_arity()) for x in flist]
         dops = dict(ops)
         #print "dicops : "  , dops

@@ -45,6 +45,19 @@ class NetMain(object):
         X_reduced = self.scaler.fit_transform(X_reduced)
         return X_reduced
 
+    def top_features(self, X, top=2):
+        ix = self.net.get_indexes(top)
+        print "=====Top features======"
+        print ix
+        row_ix = ix[0, :]
+        X2 = X[:, row_ix]
+        t = int(top/2)
+        X2_1 = X2[:, :t]
+        X2_2 = X2[:, t:]
+        X3 = np.hstack((X2_1.mean(1).reshape((-1, 1)),
+                        X2_2.mean(1).reshape((-1, 1))))
+        return X3
+
     def plotme(self, *largs):
         gon = self.net.getLoading()
         if not gon:
@@ -54,37 +67,46 @@ class NetMain(object):
             print self.datas["nY"], "=====REAL======"
             X, Yh = self.net.getYhat(False, False)
             Y = self.datas["Y"]
-            self.plotter.plot(X, Y, Yh)
+            if self.net.getMode() == "CLA" and X.shape[1] > 2:
+                X3 = self.top_features(X, top=2)
+                self.plotter.plot(X3, Y, Yh)
+            else:
+                self.plotter.plot(X, Y, Yh)
             self.plotter.ioff()
         else:
             X, Yh = self.net.getYhat(False, False)
             Y = self.datas["Y"]
-            self.plotter.plot(X, Y, Yh)
+            if self.net.getMode() == "CLA" and X.shape[1] > 2:
+                X3 = self.top_features(X, top=2)
+                self.plotter.plot(X3, Y, Yh)
+            else:
+                self.plotter.plot(X, Y, Yh)
 
     def classify(self):
 
         nrOpts = {"opx": 1, "depth": 1, "nvars": None, "pvc": .6,
-                  "pf": 1., "cross": .4, "mut": .6, "mrand": .5}
-        gOpts = {"mxepoch": 4000, "bsize": 150, "bupdate": 25, "fraction": .25,
-                 "history": 4, "mxtries": 5, "mode": "CLA"}
+                  "pf": 1., "cross": .4, "mut": .5, "mrand": .5}
+        gOpts = {"mxepoch": 1500, "bsize": 192, "bupdate": 10, "fraction": .25,
+                 "history": 5, "mxtries": 5, "mode": "CLA"}
 
         print nrOpts
         print gOpts
         X, y = self.getXY("iris")
         #X, y = self.getXY("digits")
 
+        # lecercle de propagatio momento et reset arbres
         # print i, o, "dim"
         X, y = shuffle(X, y)
         o = np.unique(y).size
 
-        X = X[:300]
-        y = y[:300]
+        X = X[:500]
+        y = y[:500]
 
         X1 = self.scaler.fit_transform(X)
-        X_pca = PCA(n_components=2).fit_transform(X1)
         kernel = 'pca'
-        # XX = X1
-        #XX = X_pca
+        # X_pca = PCA(n_components=2).fit_transform(X1)
+        #XX = X1
+        # XX = X_pca
         XX = self.ktsne(X1, kernel)
         Xtr = XX[:-10]
         Xts = XX[-10:]
@@ -94,7 +116,7 @@ class NetMain(object):
         i = Xtr.shape[1]
         self.datas = {"X": Xtr, "Y": ytr, "nX": Xts, "nY": yts}
 
-        l_dims = [i, o]
+        l_dims = [i,  o]
         self.net = NClassifier(dim=l_dims, datas=self.datas,
                                nr_opts=nrOpts, g_opts=gOpts)
         self.net.setLoading(True)
@@ -105,26 +127,25 @@ class NetMain(object):
 
     def reg(self):
 
-        nrOpts = {"opx": 2, "depth": 2, "nvars": None, "pvc": .7,
-                  "pf": 1., "cross": .4, "mut": .6, "mrand": .5}
-        gOpts = {"mxepoch": 3000, "bsize": 64, "bupdate": 5, "fraction": .25,
-                 "history": 4, "mxtries": 10, "mode": "REG"}
-
+        nrOpts = {"opx": 3, "depth": 1, "nvars": None, "pvc": .6,
+                  "pf": 1., "cross": .3, "mut": .5, "mrand": .5}
+        gOpts = {"mxepoch": 2500, "bsize": 192, "bupdate": 10, "fraction": .25,
+                 "history": 5, "mxtries": 5, "mode": "REG"}
         print nrOpts
         print gOpts
 
-        #X = np.random.normal(size=100)
-        #XX=np.arange(0, 105, 1)
-        #XX = np.random.randint(low=-50, high=50, size=1000)
+        # X = np.random.normal(size=100)
+        # XX=np.arange(0, 105, 1)
+        # XX = np.random.randint(low=-50, high=50, size=1000)
         XX = np.linspace(-10., 11., num=100)
         YY = (XX - 2) * np.cos(2 * XX)
-        #YY = XX**2 + XX - 1
+        # YY = XX**2 + XX - 1
         # Make sure that it X is 2D
-        #N = 1000
-        #s = 10
-        #XX = s*np.random.rand(N)
-        #XX = np.sort(XX)
-        #YY = np.sin(XX) + 0.1*np.random.randn(N)
+        # N = 1000
+        # s = 10
+        # XX = s*np.random.rand(N)
+        # XX = np.sort(XX)
+        # YY = np.sin(XX) + 0.1*np.random.randn(N)
         Y = YY[:-5]
         nY = YY[-5:]
         X = XX[:-5]
@@ -146,5 +167,5 @@ class NetMain(object):
 
 if __name__ == "__main__":
     m = NetMain()
-    m.reg()
-    # m.classify()
+    # m.reg()
+    m.classify()

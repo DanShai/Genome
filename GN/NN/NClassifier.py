@@ -19,6 +19,7 @@ class NClassifier(NBase):
         inout = inp[:]
         for lay in anet:
             inout = lay.evaluate(inout)
+            #inout = self.relu(inout)
             #inout = self.sigmoid(inout)
             #inout = np.tanh(inout)
 
@@ -29,16 +30,11 @@ class NClassifier(NBase):
     def _score(self, x, y):
         p = self.predict(self._net, x)
         # pm = np.argmax(p)
-
-        # scr = (pm - y)**2 #mse
-
-        scr = -np.log(p[y])
-
-        # scr = np.log(np.cosh(pm - y))   # log
-
         # pequals = np.equal(pm, y)
         # scr = (pequals == False)
         # print "pm: " , pm , "y: " , y , "pe: ", pequals , "scr: " , scr
+
+        scr = -np.log(p[y])
 
         return scr
 
@@ -75,5 +71,5 @@ class NClassifier(NBase):
     def sigmoid(self, x):
         return .5 * (1 + np.tanh(.5 * x))
 
-    def relu(self, x):
-        return np.maximum(x, .0001*x, x)
+    def relu(self, x, alpha=.01):
+        return np.maximum(x, np.exp(alpha*x) - 1)

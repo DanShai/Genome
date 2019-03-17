@@ -4,8 +4,11 @@
 '''
 
 from __future__ import division
-import numpy as np
+
 from copy import deepcopy
+
+import numpy as np
+
 from GN.Gene.Genome import Genome
 
 
@@ -31,3 +34,11 @@ class Layer:
             nodes += "[ " + nd.__repr__() + " ] \n"
 
         return nodes
+
+    def get_indexes(self):
+        indexes = []
+        for nd in self._nodes:
+            indexes += nd.get_index()
+
+        #indexes = list(set(indexes))
+        return indexes

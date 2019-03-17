@@ -4,11 +4,14 @@
 '''
 
 from __future__ import division
-import numpy as np
+
 from copy import deepcopy
-from Layer import Layer
 from datetime import datetime
 from random import choice
+
+import numpy as np
+
+from Layer import Layer
 
 
 class NBase:
@@ -167,6 +170,21 @@ class NBase:
             n += l.__repr__()
             i += 1
         print n
+
+    def sort_arr(self, arr):
+        uniq, counts = np.unique(arr, return_counts=True)
+        a = np.asarray((uniq, counts)).T
+        b = a[a[:, 1].argsort()][::-1]
+        return b.T
+
+    def get_indexes(self, top=2):
+        indexes = []
+        for l in self._best_net:
+            indexes += l.get_indexes()
+        #indexes = list(set(indexes))
+        indexes = self.sort_arr(indexes)[:, :top]
+
+        return indexes
 
     def setLoading(self, l):
         self._loading = l

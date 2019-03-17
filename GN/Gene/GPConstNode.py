@@ -5,6 +5,7 @@
 
 
 from __future__ import division
+
 from GPNode import GPNode
 
 
@@ -24,3 +25,6 @@ class GPConstNode(GPNode):
 
     def nodes(self):
         return [str(self._constValue)]
+
+    def get_index(self):
+        return []

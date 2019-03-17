@@ -31,19 +31,22 @@ check the GOerationsDef.py file for the list of functions can the Genome take! y
 set the group index in the variable "opx" of the genome option : nrOpts = {"opx": 2,..}
 
 - group 1 : basic operations add and multiply
-- group 2-3 : more general functions
-- group 4: logical functions
-- group 5 : all the functions
+- group 2 : logarithmic functions
+- group 3 : periodic functions
+- group 4 : mix of 2 & 3 above
+- group 5: logical functions
+- group 6 : all the functions
 
 ```python
 class GOperationsDef:
         ...
         self._FunctSlots = {
             1: [self.mul_o, self.add_o],
-            2: [self.mul_o, self.sub_o, self.add_o, self.log_o, self.sqrt_o, self.exp_o, self.cos_o, self.sin_o],
-            3: [self.inv_o, self.abs_o, self.div_o, self.mul_o, self.sub_o, self.add_o, self.log_o, self.sqrt_o, self.exp_o, self.cos_o, self.sin_o],
-            4: [self.max_o, self.min_o, self.if_o, self.lt_o, self.gt_o, self.not_o, self.xor_o, self.and_o, self.or_o],
-            5: [self.inv_o, self.div_o, self.mod_o, self.xor_o, self.and_o, self.or_o, self.mul_o, self.sub_o, self.add_o,
+            2: [self.mul_o, self.sub_o, self.add_o, self.log_o, self.sqrt_o, self.exp_o],
+            3: [self.mul_o, self.sub_o, self.add_o, self.sqrt_o, self.cos_o, self.sin_o],
+            4: [self.inv_o, self.abs_o, self.div_o, self.mul_o, self.sub_o, self.add_o, self.log_o, self.sqrt_o, self.exp_o, self.cos_o, self.sin_o],
+            5: [self.max_o, self.min_o, self.if_o, self.lt_o, self.gt_o, self.not_o, self.xor_o, self.and_o, self.or_o],
+            6: [self.inv_o, self.div_o, self.mod_o, self.xor_o, self.and_o, self.or_o, self.mul_o, self.sub_o, self.add_o,
                 self.log_o, self.sqrt_o, self.exp_o, self.cos_o, self.sin_o, self.max_o, self.min_o, self.abs_o, self.if_o, self.gt_o, self.lt_o, self.not_o]
         }
 

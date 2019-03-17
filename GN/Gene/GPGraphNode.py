@@ -4,6 +4,7 @@
 '''
 
 from __future__ import division
+
 from GPNode import GPNode
 
 
@@ -40,4 +41,10 @@ class GPGraphNode(GPNode):
             res += child.nodes()
         res += [self._op]
 
+        return res
+
+    def get_index(self):
+        res = []
+        for child in self._children:
+            res += child.get_index()
         return res
