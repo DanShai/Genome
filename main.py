@@ -94,7 +94,6 @@ class NetMain(object):
         X, y = self.getXY("iris")
         #X, y = self.getXY("digits")
 
-        # lecercle de propagatio momento et reset arbres
         # print i, o, "dim"
         X, y = shuffle(X, y)
         o = np.unique(y).size
