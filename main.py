@@ -8,7 +8,6 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.utils import shuffle
 
-from GN.KTSNE.ktsne import Ktsne
 from GN.NN.NClassifier import NClassifier
 from GN.NN.NRegressor import NRegressor
 from GN.Plot.Plotter import Plotter
@@ -105,8 +104,7 @@ class NetMain(object):
         kernel = 'pca'
         # X_pca = PCA(n_components=2).fit_transform(X1)
         #XX = X1
-        # XX = X_pca
-        XX = self.ktsne(X1, kernel)
+        XX = X_pca
         Xtr = XX[:-10]
         Xts = XX[-10:]
         ytr = y[:-10]
