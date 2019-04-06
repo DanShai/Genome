@@ -8,6 +8,7 @@ from sklearn.decomposition import PCA
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.utils import shuffle
 
+from GN.KTSNE.ktsne import Ktsne
 from GN.NN.NClassifier import NClassifier
 from GN.NN.NRegressor import NRegressor
 from GN.Plot.Plotter import Plotter
@@ -36,9 +37,9 @@ class NetMain(object):
             y = digits.target
         return X, y
 
-    def ktsne(self, x, kernel):
-        f_opts = {'p_degree': 4.0, 'p_dims': 24, 'eta': 50.0,
-                  'perplexity': 20.0, 'n_dims': 2, 'ker': kernel, 'gamma': 0.1}
+    def ktsne(self, x, kernel="pca"):
+        f_opts = {'p_degree': 1.0, 'p_dims': 24, 'eta': 50.0,
+                  'perplexity': 25.0, 'n_dims': 2, 'ker': kernel, 'gamma': 0.1}
         k_tsne = Ktsne(x, f_opts=f_opts)
         X_reduced = k_tsne.get_solution(3000)
         X_reduced = self.scaler.fit_transform(X_reduced)
@@ -102,9 +103,10 @@ class NetMain(object):
 
         X1 = self.scaler.fit_transform(X)
         kernel = 'pca'
-        # X_pca = PCA(n_components=2).fit_transform(X1)
+        X_pca = PCA(n_components=2).fit_transform(X1)
         #XX = X1
-        XX = X_pca
+        #XX = X_pca
+        XX = self.ktsne(X1, kernel)
         Xtr = XX[:-10]
         Xts = XX[-10:]
         ytr = y[:-10]
