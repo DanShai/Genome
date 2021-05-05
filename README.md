@@ -1,6 +1,8 @@
 # Who Needs Neuron when you have Genome
 
-# check [here deployed as Web app](https://share.streamlit.io/nightcrawler001/genome_streamlit/main/main.py)
+## check [here deployed as Web app](https://share.streamlit.io/nightcrawler001/genome_streamlit/main/main.py)
+## Also updated version [here](https://github.com/NightCrawler001/genome_streamlit)
+
 Faster Genome Network ala Neural Network!
 The Genome Network mimic the architecture of the Neural Network, contains Layers and Nodes. you can add activations and stuffs!
 the Advantage is to have a real expressive formula for your network instead of weights!
